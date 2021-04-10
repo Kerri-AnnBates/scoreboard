@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Provider } from "./Context";
 import Header from "./Header";
 import Player from "./Player";
 import AddPlayerForm from "./AddPlayerForm";
@@ -82,29 +83,31 @@ class App extends Component {
     const highestScore = this.getHighestScore();
 
     return (
-      <div className="scoreboard">
-        <Header
-          title="Scoreboard"
-          players={this.state.players}
-        />
-
-        {/* Players list */}
-        {this.state.players.map((player, index) =>
-          <Player
-            index={index}
-            name={player.name}
-            id={player.id}
-            score={player.score}
-            key={player.id.toString()}
-            removePlayer={this.handleRemovePlayer}
-            changeScore={this.handleScoreChange}
-            isHighestScore={highestScore === player.score}
+      <Provider>
+        <div className="scoreboard">
+          <Header
+            title="Scoreboard"
+            players={this.state.players}
           />
-        )}
-        <AddPlayerForm
-          addPlayer={this.handleAddPlayer}
-        />
-      </div>
+
+          {/* Players list */}
+          {this.state.players.map((player, index) =>
+            <Player
+              index={index}
+              name={player.name}
+              id={player.id}
+              score={player.score}
+              key={player.id.toString()}
+              removePlayer={this.handleRemovePlayer}
+              changeScore={this.handleScoreChange}
+              isHighestScore={highestScore === player.score}
+            />
+          )}
+          <AddPlayerForm
+            addPlayer={this.handleAddPlayer}
+          />
+        </div>
+      </Provider>
     );
   }
 }
