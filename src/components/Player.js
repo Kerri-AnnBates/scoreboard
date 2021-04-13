@@ -4,7 +4,6 @@ import Counter from "./Counter";
 
 class Player extends PureComponent {
     static propTypes = {
-        changeScore: PropTypes.func,
         removePlayer: PropTypes.func,
         name: PropTypes.string.isRequired,
         score: PropTypes.number.isRequired,
@@ -13,7 +12,7 @@ class Player extends PureComponent {
     }
 
     render() {
-        const { name, id, removePlayer, score, index, changeScore, isHighestScore } = this.props;
+        const { name, id, removePlayer, score, index, isHighestScore } = this.props;
 
         return (
             <div className="player">
@@ -28,7 +27,6 @@ class Player extends PureComponent {
 
                 <Counter
                     score={score}
-                    changeScore={changeScore}
                     index={index}
                 />
             </div>
