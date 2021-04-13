@@ -3,6 +3,7 @@ import { Provider } from "./Context";
 import Header from "./Header";
 import Player from "./Player";
 import AddPlayerForm from "./AddPlayerForm";
+import PlayerList from './PlayerList';
 
 class App extends Component {
   state = {
@@ -83,26 +84,16 @@ class App extends Component {
     const highestScore = this.getHighestScore();
 
     return (
-      <Provider>
+      <Provider value={this.state.players}>
         <div className="scoreboard">
-          <Header
-            title="Scoreboard"
-            players={this.state.players}
-          />
+          <Header />
 
           {/* Players list */}
-          {this.state.players.map((player, index) =>
-            <Player
-              index={index}
-              name={player.name}
-              id={player.id}
-              score={player.score}
-              key={player.id.toString()}
-              removePlayer={this.handleRemovePlayer}
-              changeScore={this.handleScoreChange}
-              isHighestScore={highestScore === player.score}
-            />
-          )}
+          <PlayerList
+            removePlayer={this.handleRemovePlayer}
+            changeScore={this.handleScoreChange}
+            highestScore={highestScore}
+          />
           <AddPlayerForm
             addPlayer={this.handleAddPlayer}
           />
