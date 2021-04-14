@@ -86,22 +86,17 @@ class App extends Component {
     return (
       <Provider value={{
         players: this.state.players,
+        highestScore: highestScore,
         actions: {
           changeScore: this.handleScoreChange,
+          removePlayer: this.handleRemovePlayer,
+          addPlayer: this.handleAddPlayer
         }
       }}>
         <div className="scoreboard">
           <Header />
-
-          {/* Players list */}
-          <PlayerList
-            removePlayer={this.handleRemovePlayer}
-            highestScore={highestScore}
-          />
-
-          <AddPlayerForm
-            addPlayer={this.handleAddPlayer}
-          />
+          <PlayerList />
+          <AddPlayerForm />
         </div>
       </Provider>
     );
